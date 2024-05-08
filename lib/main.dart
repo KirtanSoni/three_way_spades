@@ -4,10 +4,16 @@ void main() {
   runApp(const MyHomePage()); 
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
-
+  
   @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  bool _isJoinGameButtonPressed = false;
+  @override  
   Widget build(BuildContext context) {
     return 
     MaterialApp(
@@ -16,28 +22,37 @@ class MyHomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Display the image
-              /* const Image(
-                //image: AssetImage('assets/image.png'), // Replace with your image path
+               const Image(
+                image: AssetImage('3_of_spades.png'), 
                 width: 200,
                 height: 200,
-              ), */
+              ), 
               const SizedBox(height: 20),
       
               // Create Game Button
+              
               ElevatedButton(
                 onPressed: () {
-                  // Handle create game action (navigation, logic, etc.)
                   print('Create Game Button Pressed');
                 },
                 child: const Text('Create Game'),
               ),
               const SizedBox(height: 10),
-      
+
+              if(_isJoinGameButtonPressed)const SizedBox(height: 100, width: 250,
+              child: TextField(
+                decoration: InputDecoration(
+                  labelText: 'Enter Access Code',
+                ),
+              ),),
               // Join Game Button
+              const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {
                   // Handle join game action (navigation, logic, etc.)
+                  setState(() {
+                    _isJoinGameButtonPressed = true;
+                  });
                   print('Join Game Button Pressed');
                 },
                 child: const Text('Join Game'),
